@@ -9,8 +9,6 @@ const showReversedString = () => rl.on('line', (string) => {
     console.log(
       `Your reversed string is: ${ string.split('').reverse().join('') }\n`
     );
-  
-    rl.close();
   });
 
 showReversedString();
