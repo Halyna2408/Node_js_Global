@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require('path');
-const csvtojsonV2 = require("csvtojson");
+import fs from 'fs';
+import path from 'path';
+import csvtojsonV2 from 'csvtojson';
 
 function convertToJSON() {
     const readableStream = fs.createReadStream(path.join(__dirname, './sourceData.csv'));
