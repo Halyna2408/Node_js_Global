@@ -50,3 +50,21 @@ export const getAllUsers = ((req: Request, res: Response, next: NextFunction) =>
     users
   });
 });
+
+export const addUser = ((req: Request, res: Response, next: NextFunction) => {
+  const newUser: User = userService.createUser(req.body);
+  if(newUser) {
+    res.status(200).json({
+      message: `${newUser} was created successufuly`,
+      newUser,
+    });
+  };
+});
+
+export const deleteUser = ((req: Request, res: Response, next: NextFunction) => {
+  const user: User = userService.removeUser(req.params.id);
+  res.status(200).json({
+    message: 'User marked as removed', 
+    user
+  });
+});

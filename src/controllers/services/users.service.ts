@@ -35,9 +35,9 @@ export class UserService {
         };
     };
 
-    public removeUser(user: User): User {
+    public removeUser(id: string): User {
         return {
-            ...user,
+            ...this.usersData.find((user: User) => user.id === id) || {} as User,
             isDeleted: true,
         };
     };
