@@ -1,9 +1,7 @@
-import { User } from "../models/user.model";
-
-export const usersData: User[] = [
+export const usersData  = [
   {
     id: '1',
-    login: 'John Smith',
+    login: 'John_Smith',
     password: 'password',
     age: 49,
     isDeleted:false,
