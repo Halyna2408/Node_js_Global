@@ -1,13 +1,9 @@
-import { sequelize } from './../../data-access/data-access';
-import { Op, Sequelize } from 'sequelize';
-import uuid from 'uuid';
+import { Op } from 'sequelize';
 
 import { User, UserModel } from "../../models/user.model";
 
 export class UserService {
-  public async getAutoSuggestUsers(loginSubstring: any, limit: any): Promise<UserModel[]> {
-    console.log('get users');
-    
+  public async getAutoSuggestUsers(loginSubstring: any, limit: any): Promise<UserModel[]> {    
       return await User.findAll({
           where: {
               isDeleted: false,
@@ -40,9 +36,7 @@ export class UserService {
       });
   };
 
-  public async updateUser(user: UserModel): Promise<UserModel> {
-    console.log('UPDATE_USER');
-    
+  public async updateUser(user: UserModel): Promise<UserModel> {    
     return await User.update({...user}, {
         where: {
           id: user.id,
@@ -51,9 +45,7 @@ export class UserService {
     }).then(([_, updatedUsers]) => updatedUsers[0]);
   };
 
-  public async removeUser(id: string): Promise<UserModel> {
-    console.log('DELETE_USER');
-    
-    return await User.update({ isDeleted: true }, { where: { id }, returning: true }).then(([_, updatedUsers]) => updatedUsers[0]);
+  public async removeUser(id: string): Promise<any> {    
+    return await User.update({ isDeleted: true }, { where: { id }, returning: true }).then(([_, updatedUsers]) => updatedUsers);
   };
 }

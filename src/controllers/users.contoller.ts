@@ -23,9 +23,7 @@ export const getUserInfo = ( async (req: Request, res: Response, next: NextFunct
   }
 });
 
-export const updateUserInfo = ( async (req: Request, res: Response, next: NextFunction) => {  
-  console.log("UPDATE_USER");
-  
+export const updateUserInfo = ( async (req: Request, res: Response, next: NextFunction) => {    
   const updatedUser: UserModel = await userService.updateUser(req.body);
   const { id, login, password, age, isDeleted } = updatedUser;
   
@@ -61,9 +59,7 @@ export const addUser = ( async (req: Request, res: Response, next: NextFunction)
   };
 });
 
-export const deleteUser = ((req: Request, res: Response, next: NextFunction) => {
-  console.log(req.params.id);
-  
+export const deleteUser = ((req: Request, res: Response, next: NextFunction) => {  
   const user: any = userService.removeUser(req.params.id);
   res.status(200).json({
     message: 'User marked as removed', 

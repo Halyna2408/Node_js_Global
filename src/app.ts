@@ -14,10 +14,8 @@ app.use('/api/users', routerUsers);
 
 
 sequelize.authenticate()
-.then(() => console.log('Connected'))
 .then(() => User.sync({ force: true }))
 .then(() => User.bulkCreate(usersData))
-.then(() => console.log('data was inserted to Users table'))
 .catch((error: Error) => console.log(`Oops! Something wents wrong: ${ error }`));
 
 app.listen(PORT, (): void => {
