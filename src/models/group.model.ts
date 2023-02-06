@@ -9,6 +9,13 @@ export enum Permissions {
   UPLOAD_FILES = 'UPLOAD_FILES',
 }
 
+export enum GroupName {
+  DEV = 'DEV',
+  LEAD = 'LEAD',
+  QA = 'QA',
+  BA = 'BA',
+}
+
 export interface GroupModel extends Model {
   id: string;
   name: string;
