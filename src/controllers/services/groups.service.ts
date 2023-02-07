@@ -1,13 +1,12 @@
+import { v4 as uuidv4 } from 'uuid';
+import { sequelize } from '../../data-access/data-access';
 import { Group, GroupModel } from "../../models/group.model";
-
+import { UserGroup } from '../../models/user-group.model';
+import { User } from "../../models/user.model";
 
 export class GroupService {
   public async getGroupById(id: string): Promise<GroupModel | null> {
-    return await Group.findOne({
-      where: {
-        id
-      },
-    });
+    return await Group.findByPk(id);
   }
 
   public async getAllGroups(): Promise<GroupModel[]> {
@@ -19,6 +18,7 @@ export class GroupService {
   public async createGroup(group: GroupModel): Promise<GroupModel> {
     return await Group.create({
       ...group,
+      id: uuidv4(),
     })
   }
 
@@ -40,5 +40,14 @@ export class GroupService {
       },
       force: true,
     });
+  }
+
+  public async addUsersToGroup(userIds: string[], groupId: string): Promise<any> {
+    const userGroup = await userIds.map((userId: string) => UserGroup.create({
+      groupId,
+      userId,
+    }));
+
+    return Promise.all(userGroup).then((data) => data);
   }
 }

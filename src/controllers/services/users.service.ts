@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { Op } from 'sequelize';
 
 import { User, UserModel } from "../../models/user.model";
@@ -25,14 +26,9 @@ export class UserService {
   };
 
   public async createUser(user: UserModel): Promise<UserModel> {        
-      const { id, login, password, age, isDeleted } = user;
-      
       return await User.create({
-        id,
-        login,
-        password,
-        age, 
-        isDeleted,
+        ...user,
+        id: uuidv4(),
       });
   };
 
