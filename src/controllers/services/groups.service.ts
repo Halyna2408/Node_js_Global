@@ -42,12 +42,11 @@ export class GroupService {
     });
   }
 
-  public async addUsersToGroup(userIds: string[], groupId: string): Promise<any> {
+  public async addUsersToGroup(userIds: any, groupId: string): Promise<any> {  
     const userGroup = await userIds.map((userId: string) => UserGroup.create({
       groupId,
       userId,
-    }));
-
-    return Promise.all(userGroup).then((data) => data);
+    }));   
+    return Promise.resolve(userGroup).then((data) => data);
   }
 }

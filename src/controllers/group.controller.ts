@@ -47,3 +47,10 @@ export const deleteGroup = ( async (req: Request, res: Response) => {
       message: `The group  was successufuly deleted`,
     });
   });
+
+  export const addUsersToGroup = ( async (req: Request, res: Response) => {
+    await groupService.addUsersToGroup(req.body.userIds, req.params.groupId);  
+    res.status(200).json({
+      message: `Users was added to group`,
+    });
+  });

@@ -19,23 +19,20 @@ app.use('/api/groups', groupRouters);
 
 
 sequelize.authenticate()
-.then(() => User.sync({ force: true }))
-.then(() => Group.sync({ force: true }))
-.then(() => UserGroup.sync({ force: true }))
-
 .then(() => User.bulkCreate(usersData))
 .then(() => Group.bulkCreate(groupData))
 
 .then(() => User.belongsToMany(Group, {
   through: UserGroup,
-  as: 'users',
-  foreignKey: 'userId',
 }))
 .then(() => Group.belongsToMany(User, {
   through: UserGroup,
-  as: 'groups',
-  foreignKey: 'groupId',
 }))
+
+.then(() => User.sync({ force: true }))
+.then(() => Group.sync({ force: true }))
+.then(() => UserGroup.sync({ force: true }))
+
 .catch((error: Error) => console.log(`Oops! Something wents wrong: ${ error }`));
 
 app.listen(PORT, (): void => {

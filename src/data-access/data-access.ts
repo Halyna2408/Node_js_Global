@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
 
-const DB_PATH = 'postgres://kmqjoris:k6XtU0ZciEijiMtl1zxugUzMMmlyx7lQ@dumbo.db.elephantsql.com/kmqjoris';
+const DB_PATH = 'postgres://qqtmgrsk:vxl6qg7whM2txL00WFgZY1ZRNyBPYVk0@dumbo.db.elephantsql.com/qqtmgrsk';
 
 export const sequelize = new Sequelize(DB_PATH);

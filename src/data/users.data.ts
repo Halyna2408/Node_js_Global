@@ -8,7 +8,7 @@ export const usersData  = [
   },
   {
     id: "5b7a846290d6ff6894377fb5",
-    login: "Decker Albert",
+    login: "Decker_Albert",
     password: 'password',
     age: 22,
     isDeleted:false,
