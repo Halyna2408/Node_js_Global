@@ -43,10 +43,8 @@ export class GroupService {
   }
 
   public async addUsersToGroup(userIds: any, groupId: string): Promise<any> {  
-    const userGroup = await userIds.map((userId: string) => UserGroup.create({
-      groupId,
-      userId,
-    }));   
-    return Promise.resolve(userGroup).then((data) => data);
+    const group = await Group.findByPk(groupId) as any;
+    const result = await group.addUser(userIds);
+    return result
   }
 }

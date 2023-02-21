@@ -2,10 +2,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { Op } from 'sequelize';
 
 import { User, UserModel } from "../../models/user.model";
+import { Group } from "../../models/group.model";
 
 export class UserService {
   public async getAutoSuggestUsers(loginSubstring: any, limit: any): Promise<UserModel[]> {    
       return await User.findAll({
+          include: Group,
           where: {
               isDeleted: false,
               login: {

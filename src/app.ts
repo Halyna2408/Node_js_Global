@@ -19,8 +19,6 @@ app.use('/api/groups', groupRouters);
 
 
 sequelize.authenticate()
-.then(() => User.bulkCreate(usersData))
-.then(() => Group.bulkCreate(groupData))
 
 .then(() => User.belongsToMany(Group, {
   through: UserGroup,
@@ -32,6 +30,9 @@ sequelize.authenticate()
 .then(() => User.sync({ force: true }))
 .then(() => Group.sync({ force: true }))
 .then(() => UserGroup.sync({ force: true }))
+
+.then(() => User.bulkCreate(usersData))
+.then(() => Group.bulkCreate(groupData))
 
 .catch((error: Error) => console.log(`Oops! Something wents wrong: ${ error }`));
 
