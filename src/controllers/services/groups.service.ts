@@ -44,6 +44,11 @@ export class GroupService {
 
   public async addUsersToGroup(userIds: any, groupId: string): Promise<any> {  
     const group = await Group.findByPk(groupId) as any;
-    return await group.addUser(userIds)
+    return await group.addUsers(userIds)
+  }
+
+  public async countUsersInGroup(groupId: string): Promise<number> {  
+    const group = await Group.findByPk(groupId) as any;
+    return await group.countUsers();
   }
 }

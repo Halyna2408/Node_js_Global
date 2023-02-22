@@ -48,9 +48,16 @@ export const deleteGroup = ( async (req: Request, res: Response) => {
     });
   });
 
-  export const addUsersToGroup = ( async (req: Request, res: Response) => {
-    await groupService.addUsersToGroup(req.body.userIds, req.params.groupId);  
-    res.status(200).json({
-      message: `Users was added to group`,
-    });
+export const addUsersToGroup = ( async (req: Request, res: Response) => {
+  await groupService.addUsersToGroup(req.body.userIds, req.params.groupId);  
+  res.status(200).json({
+    message: `Users was added to group`,
   });
+});
+
+export const countUsersInGroup = ( async (req: Request, res: Response) => {
+  const quantityOfUsers = await groupService.countUsersInGroup(req.params.groupId);  
+  res.status(200).json({
+    message: `The group ${req.params.groupId} included ${quantityOfUsers} users`,
+  });
+});

@@ -11,7 +11,10 @@ groupRouters.route('/:groupId')
   .get(groupController.getGroupById)
   .patch(groupController.updateGroupById)
   .delete(groupController.deleteGroup)
+
+groupRouters.route('/:groupId/add-users')
   .post(groupController.addUsersToGroup)
+  .get(groupController.countUsersInGroup)
 
 export {
   groupRouters,
