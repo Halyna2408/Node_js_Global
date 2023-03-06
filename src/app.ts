@@ -27,12 +27,11 @@ process
     process.exit(1);
   });
 
-app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _: Request, res: Response, __: NextFunction) => {
     if (err instanceof ResponseError) {
         res.status(err.statusCode).json({ message: err.message });
     }
     res.status(500).json({ message: err.message });
-    next();
 });
 
 app.use('/api/users', routerUsers);
