@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import * as bcrypt  from 'bcrypt';
 import { Op } from 'sequelize';
 
 import { User, UserModel } from "../../models/user.model";
@@ -46,4 +47,20 @@ export class UserService {
   public async removeUser(id: string): Promise<any> {    
     return await User.update({ isDeleted: true }, { where: { id }, returning: true }).then(([_, updatedUsers]) => updatedUsers);
   };
+
+  public async findUserByCredential(login: string): Promise<UserModel | null> {
+    return await User.findOne({
+      where: {
+        login,
+      },
+    });
+  }
+
+  public async registration(login: string, password: string): Promise<UserModel> {
+    return await User.create({
+      id: uuidv4(),
+      login,
+      password: await bcrypt.hash(password, 10),
+    })
+  }
 }

@@ -8,7 +8,7 @@ const routerUsers = express.Router();
 
 routerUsers.route('/')
   .get(tryCatchWrapper(userController.getAllUsers))
-  .post(validateUserSchema(UserSchema),tryCatchWrapper(userController.addUser))
+  .post(validateUserSchema(UserSchema), tryCatchWrapper(userController.addUser))
 
 routerUsers.route('/:id')
   .get(tryCatchWrapper(userController.getUserInfo))
