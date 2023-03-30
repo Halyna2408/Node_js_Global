@@ -1,3 +1,10 @@
+
+import dotenv from 'dotenv';
+import cookieParser  from 'cookie-parser';
+import cors  from 'cors';
+
+import { checkAccessToken } from './routers/middleware/token.middleware';
+import { authRouters } from './routers/authRouter';
 import { Group } from './models/group.model';
 import { sequelize } from './data-access/data-access';
 import express, { Application } from 'express';
@@ -11,10 +18,13 @@ import { UserGroup } from './models/user-group.model';
 import { ResponseError } from './helpers/error-handling.helper';
 import { logger } from './helpers/logger.helper';
 
+dotenv.config();
 const app: Application = express();
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 3000;
 
+app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 process
   .on('unhandledRejection', (reason) => {
@@ -35,8 +45,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     logger.error(`500 - ${res.statusMessage} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`)
 });
 
-app.use('/api/users', routerUsers);
-app.use('/api/groups', groupRouters);
+app.use('/api', authRouters);
+app.use('/api/users', checkAccessToken, routerUsers);
+app.use('/api/groups', checkAccessToken, groupRouters);
 
 
 sequelize.authenticate()

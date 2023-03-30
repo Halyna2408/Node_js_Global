@@ -7,6 +7,7 @@ export interface UserModel extends Model {
     password: string;
     age: number;
     isDeleted: boolean;
+    refreshToken?: string;
 }
 
 export const User = sequelize.define<UserModel>('User', {
@@ -31,7 +32,14 @@ export const User = sequelize.define<UserModel>('User', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-    }
+    },
+    refreshToken: DataTypes.STRING,
 }, {
     tableName: 'Users'
 });
+
+
+export interface UserAuthPayload {
+  login: string;
+  password: string;
+}
