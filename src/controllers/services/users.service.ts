@@ -5,7 +5,7 @@ import { Op } from 'sequelize';
 import { User, UserModel } from "../../models/user.model";
 import { Group } from '../../models/group.model';
 
-export class UserService {
+export default class UserService {
   public async getAutoSuggestUsers(loginSubstring: any, limit: any): Promise<UserModel[]> {    
       return await User.findAll({
           include: Group,
@@ -44,7 +44,7 @@ export class UserService {
     }).then(([_, updatedUsers]) => updatedUsers[0]);
   };
 
-  public async removeUser(id: string): Promise<any> {    
+  public async removeUser(id: string): Promise<UserModel[]> {    
     return await User.update({ isDeleted: true }, { where: { id }, returning: true }).then(([_, updatedUsers]) => updatedUsers);
   };
 
